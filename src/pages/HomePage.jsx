@@ -1,15 +1,14 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { ArrowRight, CalendarDays } from 'lucide-react';
 import { useTasks } from '../hooks/useTasks';
+import Sidebar from '../components/Sidebar';
 import TaskCard from '../components/TaskCard';
 import TaskFormModal from '../components/TaskFormModal';
+import ProgressHeader from '../components/ProgressHeader';
 import './HomePage.css';
 
 export default function HomePage() {
-  const navigate = useNavigate();
   const { getTasksByDate, toggleTask, addTask, updateTask, deleteTask } =
     useTasks();
   const [editingTask, setEditingTask] = useState(null);
@@ -21,9 +20,16 @@ export default function HomePage() {
     locale: ptBR,
   });
   const todayTasks = getTasksByDate(todayStr);
+  const completedCount = todayTasks.filter((t) => t.completed).length;
+  const totalCount = todayTasks.length;
 
   const handleEditTask = (task) => {
     setEditingTask(task);
+    setIsModalOpen(true);
+  };
+
+  const handleNewTask = () => {
+    setEditingTask(null);
     setIsModalOpen(true);
   };
 
@@ -48,44 +54,42 @@ export default function HomePage() {
 
   return (
     <div className="home">
-      <div className="home__container">
-        <header className="home__header">
-          <h1 className="home__greeting">Olá, Samuel</h1>
-          <p className="home__subtitle">Seja bem-vindo novamente</p>
-        </header>
+      <Sidebar onNewTask={handleNewTask} />
 
-        <section className="home__today">
-          <div className="home__date">
-            <CalendarDays size={18} />
-            <span>Hoje — {todayFormatted}</span>
-          </div>
+      <main className="home__main">
+        <div className="home__content">
+          <ProgressHeader
+            completedCount={completedCount}
+            totalCount={totalCount}
+            dateText={todayFormatted}
+          />
 
-          <div className="home__tasks">
-            {todayTasks.length === 0 ? (
-              <div className="home__empty">
-                <p>Nenhuma tarefa para hoje</p>
-                <p className="home__empty-hint">
-                  Abra a agenda para criar novas tarefas
-                </p>
-              </div>
-            ) : (
-              todayTasks.map((task) => (
-                <TaskCard
-                  key={task.id}
-                  task={task}
-                  onToggleComplete={toggleTask}
-                  onEdit={handleEditTask}
-                />
-              ))
-            )}
-          </div>
-        </section>
+          <section className="home__today">
+            <h2 className="home__section-title">Hoje</h2>
 
-        <button className="home__cta" onClick={() => navigate('/planner')}>
-          <span>Abrir agenda completa</span>
-          <ArrowRight size={18} />
-        </button>
-      </div>
+            <div className="home__tasks">
+              {todayTasks.length === 0 ? (
+                <div className="home__empty">
+                  <p>Nenhuma tarefa para hoje ainda</p>
+                  <p className="home__empty-hint">
+                    Clique em <span className="home__accent">Nova tarefa</span> na
+                    sidebar para começar agora.
+                  </p>
+                </div>
+              ) : (
+                todayTasks.map((task) => (
+                  <TaskCard
+                    key={task.id}
+                    task={task}
+                    onToggleComplete={toggleTask}
+                    onEdit={handleEditTask}
+                  />
+                ))
+              )}
+            </div>
+          </section>
+        </div>
+      </main>
 
       <TaskFormModal
         isOpen={isModalOpen}
