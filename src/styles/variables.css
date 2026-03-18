@@ -1,0 +1,42 @@
+:root {
+  /* Background */
+  --bg-primary: #0F0F11;
+  --bg-secondary: #16171A;
+  --bg-card: #1E2025;
+  --border-card: #2A2C31;
+
+  /* Text */
+  --text-primary: #F5F5F5;
+  --text-secondary: #A1A1AA;
+
+  /* Categories */
+  --cat-estudo: #3B82F6;
+  --cat-academia: #FACC15;
+  --cat-trabalho: #8B5CF6;
+  --cat-pessoal: #22C55E;
+
+  /* Action */
+  --action-primary: #2563EB;
+  --action-primary-hover: #1d4ed8;
+
+  /* Status */
+  --status-completed: #22C55E;
+
+  /* Today highlight */
+  --today-border: #3B82F6;
+  --today-glow: rgba(59, 130, 246, 0.15);
+
+  /* Spacing — 8px grid */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+
+  /* Border radius */
+  --radius: 12px;
+  --radius-sm: 8px;
+
+  /* Typography */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
