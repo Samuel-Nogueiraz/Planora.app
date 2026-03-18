@@ -1,6 +1,7 @@
 .task-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-card);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius);
   display: flex;
   overflow: hidden;
@@ -20,11 +21,18 @@
 }
 
 .task-card__body {
-  padding: var(--space-sm);
+  padding: var(--space-md);
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--space-xs);
+  min-width: 0;
+}
+
+.task-card__titles {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
   min-width: 0;
 }
 
@@ -68,8 +76,8 @@
 .task-card__status {
   font-size: 11px;
   font-weight: 500;
-  color: var(--text-secondary);
-  background: rgba(161, 161, 170, 0.1);
+  color: var(--status-color);
+  background: var(--status-bg);
   padding: 2px 8px;
   border-radius: 4px;
 }
@@ -90,40 +98,19 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 2px solid var(--border-card);
-  transition: border-color 200ms ease;
+  border: 2px solid var(--status-color);
+  transition: transform 200ms ease, background 200ms ease;
 }
 
 .task-card__toggle:hover .task-card__circle {
-  border-color: var(--status-completed);
+  transform: scale(1.05);
 }
 
 /* Completed state */
 .task-card--completed {
-  opacity: 0.55;
-}
-
-.task-card--completed:hover {
-  opacity: 0.75;
-}
-
-.task-card--completed .task-card__category-bar {
-  background: var(--status-completed);
-}
-
-.task-card__body--done {
-  padding: 12px var(--space-sm);
-  flex-direction: row;
-  align-items: center;
-  gap: var(--space-xs);
+  box-shadow: 0 6px 24px rgba(34, 197, 94, 0.08);
 }
 
 .task-card__toggle--done {
-  color: var(--status-completed);
-}
-
-.task-card__done-title {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--status-completed);
+  color: var(--status-color);
 }

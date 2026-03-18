@@ -1,6 +1,7 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Plus, CalendarDays, LayoutGrid, Tag } from 'lucide-react';
 import './Sidebar.css';
+import logoSrc from '../images/Planora-logo.png';
 
 const NAV_ITEMS = [
   { id: 'home', label: 'Hoje', icon: LayoutGrid, path: '/' },
@@ -15,7 +16,14 @@ export default function Sidebar({ onNewTask }) {
   return (
     <aside className="sidebar">
       <div className="sidebar__brand">
-        <h1 className="sidebar__logo">Planora</h1>
+        <button
+          type="button"
+          className="sidebar__brand-button"
+          aria-label="Ir para a página inicial"
+          onClick={() => navigate('/')}
+        >
+          <img src={logoSrc} className="sidebar__logo" alt="Planora" />
+        </button>
       </div>
 
       <button className="sidebar__new-task" onClick={onNewTask}>
@@ -31,13 +39,28 @@ export default function Sidebar({ onNewTask }) {
               location.pathname === item.path ? 'sidebar__link--active' : ''
             }`}
             onClick={() => item.path && navigate(item.path)}
-            disabled={!item.path}
           >
             <item.icon size={18} />
             <span>{item.label}</span>
           </button>
         ))}
       </nav>
+
+      <footer className="sidebar__footer">
+        <div className="sidebar__user-box">
+          <div className="sidebar__avatar" aria-hidden="true" />
+          <div className="sidebar__user-info">
+            <div className="sidebar__user-name">Samuel</div>
+            <a
+              className="sidebar__edit-profile"
+              href="#"
+              onClick={(e) => e.preventDefault()}
+            >
+              Editar perfil
+            </a>
+          </div>
+        </div>
+      </footer>
     </aside>
   );
 }
