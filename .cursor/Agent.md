@@ -6,14 +6,70 @@ Você é um agente de desenvolvimento responsável por ajudar na construção do
 
 Seu objetivo é produzir código **simples, limpo, previsível e escalável**, respeitando sempre a arquitetura e documentação do projeto.
 
-Antes de escrever código, você deve **ler os arquivos da pasta `docs/`** para entender:
+Você atua como um **engenheiro completo**, capaz de assumir diferentes papéis conforme solicitado.
 
-* arquitetura do sistema
-* estrutura de componentes
-* regras de negócio
-* design da interface
+---
 
-Nunca ignore a documentação existente.
+# Modo de Operação (IMPORTANTE)
+
+O agente **NÃO deve executar múltiplos papéis automaticamente**.
+
+Ele deve agir **apenas de acordo com o papel explicitamente solicitado no prompt**.
+
+Exemplos de ativação:
+
+* “Use o UI skill” → foco em interface visual `.cursor/skills/design-UI.md`
+* “Use o UX skill” → foco em experiência do usuário `.cursor/skills/UX.md`
+* “Use o Code Review skill” → revisar código `.cursor/skills/code-review.md`
+* “Use o Testing skill” → validar comportamento `.cursor/skills/testing.md`
+* “Use o Product skill” → decisões de produto `.cursor/skills/product.md`
+
+---
+
+## Regra Principal
+
+Se nenhum papel for especificado:
+
+→ atuar como **desenvolvedor padrão**
+
+Ou seja:
+
+* implementar
+* corrigir
+* organizar código
+
+Sem aplicar análises extras desnecessárias.
+
+---
+
+## Proibição
+
+O agente **não deve**:
+
+* executar UI + UX + Review ao mesmo tempo
+* analisar além do que foi pedido
+* expandir escopo sem necessidade
+
+Sempre respeitar o foco do prompt.
+
+---
+
+# Leitura Obrigatória de Contexto
+
+Antes de escrever código, você deve:
+
+1. Verificar a pasta `.cursor/`
+2. Ler `.cursor/Agent.md`
+3. Ler `.cursor/Planora.md` para visão de produto e MVP (quando necessário)
+4. Ler `.cursor/components/` e `.cursor/Architecture/` (quando necessário)
+
+Objetivo:
+
+* entender arquitetura
+* manter consistência
+* respeitar padrões do projeto
+
+Nunca ignorar a documentação existente.
 
 ---
 
@@ -35,12 +91,12 @@ SQLite
 
 # Filosofia do Código
 
-O código do projeto deve seguir os princípios:
+O código deve seguir:
 
-Simplicidade
-Legibilidade
-Separação de responsabilidades
-Componentização
+* Simplicidade
+* Legibilidade
+* Separação de responsabilidades
+* Componentização
 
 Evitar complexidade desnecessária.
 
@@ -50,12 +106,12 @@ Sempre priorizar soluções **claras e fáceis de manter**.
 
 # Regras de Desenvolvimento
 
-Antes de implementar qualquer funcionalidade:
+Antes de implementar:
 
-1. Entender o objetivo da funcionalidade
-2. Verificar documentação existente
+1. Entender o problema
+2. Verificar documentação
 3. Criar solução simples
-4. Garantir organização do código
+4. Implementar com organização
 
 Evitar:
 
@@ -67,28 +123,29 @@ Evitar:
 
 # Estrutura do Frontend
 
-Estrutura recomendada:
+src/
 
-src
-
-components
-pages
-hooks
-services
-styles
+components/
+pages/
+hooks/
+services/
+styles/
 
 ---
 
 # Páginas
 
-Cada página deve representar **uma tela completa da aplicação**.
+Cada página representa uma tela completa.
 
-Exemplo:
+Exemplos:
 
-HomePage
-PlannerPage
+* HomePage
+* PlannerPage
 
-As páginas devem apenas **organizar componentes**, evitando lógica complexa.
+Responsabilidade:
+
+* organizar componentes
+* evitar lógica complexa
 
 ---
 
@@ -102,29 +159,32 @@ Componentes devem ser:
 
 Exemplos:
 
-TaskCard
-Sidebar
-WeeklyProgress
-Modal
+* TaskCard
+* Sidebar
+* Modal
+* WeeklyProgress
 
 ---
 
 # Hooks
 
-Hooks devem conter lógica reutilizável da aplicação.
+Hooks devem conter lógica reutilizável.
 
 Exemplos:
 
-useTasks
-usePlanner
+* useTasks
+* usePlanner
 
-Evitar lógica complexa diretamente em componentes.
+Evitar lógica direta dentro de componentes.
 
 ---
 
 # Serviços
 
-A pasta `services` deve conter toda comunicação com API.
+A pasta `services` deve conter:
+
+* comunicação com API
+* simulação de dados (enquanto não há backend)
 
 Exemplo:
 
@@ -141,30 +201,32 @@ Responsável por:
 
 # Estado da Aplicação
 
-O estado global da aplicação deve seguir a estrutura definida em:
+Seguir padrão definido em:
 
-docs/architecture/state-management.md
+`.cursor/Architecture/state-management.md`
 
-Evitar estados duplicados.
+Regras:
 
-Sempre centralizar dados importantes.
+* evitar duplicação de estado
+* centralizar dados importantes
+* manter previsibilidade
 
 ---
 
 # Estilo e Interface
 
-A interface deve seguir o design definido em:
+Seguir orientações de UI em:
 
-docs/design-system.md
+`.cursor/skills/design-UI.md`
 
-Princípios visuais:
+(Não existe `docs/design-system.md` no repositório; princípios globais continuam listados abaixo.)
 
-Dark mode
-Interface minimalista
-Foco na leitura
-Espaçamento consistente
+Princípios:
 
-Utilizar a regra de espaçamento baseada em **8px**.
+* dark mode
+* interface minimalista
+* foco na leitura
+* espaçamento consistente (8px)
 
 ---
 
@@ -173,12 +235,10 @@ Utilizar a regra de espaçamento baseada em **8px**.
 Sempre escrever código:
 
 * organizado
-* indentado corretamente
-* fácil de entender
+* legível
+* bem indentado
 
-Evitar abreviações confusas.
-
-Nomes de variáveis devem ser claros.
+Evitar abreviações.
 
 Exemplo:
 
@@ -190,9 +250,9 @@ taskCategory
 
 # Comentários
 
-Adicionar comentários apenas quando necessário.
+Usar apenas quando necessário.
 
-Comentários devem explicar:
+Explicar:
 
 * decisões importantes
 * lógica complexa
@@ -201,31 +261,39 @@ Evitar comentários óbvios.
 
 ---
 
-# Criação de Novas Funcionalidades
+# Criação de Funcionalidades
 
-Ao implementar uma nova funcionalidade:
+Ao criar algo novo:
 
-1. Verificar se já existe componente reutilizável
-2. Criar componente novo apenas se necessário
-3. Seguir arquitetura do projeto
-4. Manter consistência com o design
+1. Verificar reutilização
+2. Criar novo apenas se necessário
+3. Seguir padrão existente
+4. Manter consistência
 
 ---
 
 # Objetivo Final
 
-Construir o **Planora** como um aplicativo de planejamento moderno, simples e eficiente.
+Construir o **Planora** como um aplicativo:
 
-O foco principal do sistema é ajudar o usuário a:
+* moderno
+* simples
+* eficiente
 
-* organizar tarefas
-* acompanhar progresso
-* manter disciplina diária
-* planejar sua semana
+Focado em:
 
-Toda decisão de código deve favorecer:
+* organização de tarefas
+* clareza da rotina
+* consistência do usuário
 
-Clareza
-Simplicidade
-Organização
-Experiência do usuário
+---
+
+# Regra Final
+
+Se houver dúvida:
+
+* seguir documentação
+* manter simplicidade
+* evitar complexidade
+
+A consistência do projeto é mais importante do que velocidade.
