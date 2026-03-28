@@ -1,5 +1,10 @@
 .sidebar {
-  width: clamp(220px, 30vw, 280px);
+  /* Valores centralizados: mesmos números que antes (layout inalterado) */
+  --sidebar-brand-height: 76px;
+  --sidebar-logo-height: 110px;
+  --sidebar-logo-offset-y: -20px;
+
+  width: clamp(220px, 20vw, 280px);
   height: 100vh;
   background: var(--bg-secondary);
   border-right: 1px solid rgba(255, 255, 255, 0.08);
@@ -15,7 +20,7 @@
 .sidebar__brand {
   padding: var(--space-xs) 0 var(--space-xs) 0;
   /* Reserva altura para não empurrar "Nova tarefa", nav e rodapé */
-  height: 76px; /* 60px (logo atual) + 8px(top) + 8px(bottom) */
+  height: var(--sidebar-brand-height);
   overflow: visible;
 }
 
@@ -40,12 +45,12 @@
 
 .sidebar__logo {
   display: block;
-  height: 110px;
+  height: var(--sidebar-logo-height);
   width: auto;
   max-width: 100%;
   object-fit: contain;
   /* Mantém o alinhamento visual dentro do espaço reservado */
-  transform: translateY(-20px);
+  transform: translateY(var(--sidebar-logo-offset-y));
   margin: 0 auto;
 }
 
@@ -113,14 +118,14 @@
   margin-right: calc(-1 * var(--space-md));
   margin-bottom: calc(-1 * var(--space-md));
   padding: var(--space-sm) var(--space-md) var(--space-sm) var(--space-md);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(116, 116, 116, 0.712);
   /* Começa forte no fundo e vai ficando quase transparente perto da borda */
   background: linear-gradient(
     to top,
-    rgba(30, 58, 138, 0.28) 0%,
-    rgba(30, 58, 138, 0.1) 35%,
-    rgba(30, 58, 138, 0.04) 65%,
-    rgba(30, 58, 138, 0) 100%
+    rgba(18, 35, 83, 0.28) 0%,
+    rgba(18, 35, 83, 0.1) 35%,
+    rgba(18, 35, 83, 0.04) 65%,
+    rgba(18, 35, 83, 0) 100%
   );
 }
 

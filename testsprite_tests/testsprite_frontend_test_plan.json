@@ -1,0 +1,714 @@
+[
+  {
+    "id": "TC001",
+    "title": "Criar nova tarefa (campos obrigatórios e opcionais) e ver cartão aparecer no dia correto",
+    "description": "Garante que uma tarefa pode ser criada pelo modal e aparece listada no dia selecionado.",
+    "category": "Gerenciamento de tarefas",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Nova tarefa\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Modal de criação de tarefa\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Type \"Tarefa de teste - comprar pão\" into the \"Título\" field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"2030-01-15\" into the \"Data\" field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Salvar\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Tarefa de teste - comprar pão\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC002",
+    "title": "Cancelar criação de tarefa e garantir que nada é adicionado",
+    "description": "Verifica que fechar/cancelar o modal não cria um cartão de tarefa.",
+    "category": "Gerenciamento de tarefas",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Nova tarefa\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Modal de criação de tarefa\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Type \"Tarefa que não deve ser salva\" into the \"Título\" field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Cancelar\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Modal de criação de tarefa\" is not visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Tarefa que não deve ser salva\" is not visible"
+      }
+    ]
+  },
+  {
+    "id": "TC003",
+    "title": "Marcar tarefa como concluída e verificar atualização visual no cartão",
+    "description": "Confirma que ao marcar o checkbox de concluir, o estado visual de concluído é atualizado.",
+    "category": "Gerenciamento de tarefas",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Nova tarefa\""
+      },
+      {
+        "type": "action",
+        "description": "Type \"Tarefa para concluir\" into the \"Título\" field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"2030-01-15\" into the \"Data\" field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Salvar\""
+      },
+      {
+        "type": "action",
+        "description": "Click on the completion checkbox for the task \"Tarefa para concluir\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Indicador visual de tarefa concluída\" is visible on the task card \"Tarefa para concluir\""
+      }
+    ]
+  },
+  {
+    "id": "TC004",
+    "title": "Desmarcar tarefa concluída e verificar retorno ao estado não concluído",
+    "description": "Garante que o usuário consegue alternar de concluído para não concluído e ver a mudança visual.",
+    "category": "Gerenciamento de tarefas",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Nova tarefa\""
+      },
+      {
+        "type": "action",
+        "description": "Type \"Tarefa alternar conclusão\" into the \"Título\" field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"2030-01-15\" into the \"Data\" field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Salvar\""
+      },
+      {
+        "type": "action",
+        "description": "Click on the completion checkbox for the task \"Tarefa alternar conclusão\""
+      },
+      {
+        "type": "action",
+        "description": "Click on the completion checkbox for the task \"Tarefa alternar conclusão\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Indicador visual de tarefa concluída\" is not visible on the task card \"Tarefa alternar conclusão\""
+      }
+    ]
+  },
+  {
+    "id": "TC005",
+    "title": "Editar tarefa existente e verificar atualização do título no cartão",
+    "description": "Valida que editar uma tarefa altera os dados exibidos no cartão.",
+    "category": "Gerenciamento de tarefas",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Nova tarefa\""
+      },
+      {
+        "type": "action",
+        "description": "Type \"Título original\" into the \"Título\" field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"2030-01-15\" into the \"Data\" field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Salvar\""
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Editar\" on the task card \"Título original\""
+      },
+      {
+        "type": "action",
+        "description": "Type \"Título atualizado\" into the \"Título\" field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Salvar\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Título atualizado\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC006",
+    "title": "Excluir tarefa existente (confirmar exclusão) e verificar remoção do cartão",
+    "description": "Assegura que a exclusão com confirmação remove o cartão da lista.",
+    "category": "Gerenciamento de tarefas",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Nova tarefa\""
+      },
+      {
+        "type": "action",
+        "description": "Type \"Tarefa a excluir\" into the \"Título\" field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"2030-01-15\" into the \"Data\" field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Salvar\""
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Excluir\" on the task card \"Tarefa a excluir\""
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Confirmar\" in the delete confirmation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Tarefa a excluir\" is not visible"
+      }
+    ]
+  },
+  {
+    "id": "TC007",
+    "title": "Excluir tarefa existente (cancelar confirmação) e verificar que permanece na lista",
+    "description": "Verifica que cancelar a confirmação não remove a tarefa.",
+    "category": "Gerenciamento de tarefas",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Nova tarefa\""
+      },
+      {
+        "type": "action",
+        "description": "Type \"Tarefa não deve ser excluída\" into the \"Título\" field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"2030-01-15\" into the \"Data\" field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Salvar\""
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Excluir\" on the task card \"Tarefa não deve ser excluída\""
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Cancelar\" in the delete confirmation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Tarefa não deve ser excluída\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC008",
+    "title": "Validação: tentar salvar tarefa sem título mantém modal aberto e exibe indicação de erro",
+    "description": "Confirma validação de campo obrigatório (título) e que o modal não fecha.",
+    "category": "Gerenciamento de tarefas",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Nova tarefa\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Modal de criação de tarefa\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Type \"2030-01-15\" into the \"Data\" field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Salvar\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Título\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"obrigatório\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Modal de criação de tarefa\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC009",
+    "title": "Abrir Planner e validar estrutura básica (cabeçalho, progresso semanal e grade)",
+    "description": "Verifica que a página /planner renderiza cabeçalho, bloco de progresso semanal e a grade com colunas por dia.",
+    "category": "Visualização semanal de agenda (Planner)",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /planner"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Planner header\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Weekly progress block\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Weekly grid\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Day columns\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC010",
+    "title": "Semana atual: destacar coluna de hoje e colunas vizinhas (quando aplicável)",
+    "description": "Verifica que, quando a semana exibida contém hoje, há destaque primário no dia atual e destaque secundário em dias vizinhos aplicáveis.",
+    "category": "Visualização semanal de agenda (Planner)",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /planner"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Today column (focus primary)\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Adjacent day column (focus secondary)\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Weekly grid\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC011",
+    "title": "Navegar para próxima semana e validar atualização do rótulo da semana e conteúdo",
+    "description": "Verifica que ao avançar uma semana, o rótulo da semana e o conteúdo exibido mudam.",
+    "category": "Visualização semanal de agenda (Planner)",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /planner"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Week label\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Next week\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Week label\" is updated compared to previous value"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Weekly grid\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC012",
+    "title": "Semana que não contém hoje: não deve haver destaques de foco primário/secundário",
+    "description": "Verifica que ao sair da semana atual, a grade não aplica destaque de hoje e não executa scroll automático para hoje.",
+    "category": "Visualização semanal de agenda (Planner)",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /planner"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Next week\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Today column (focus primary)\" is not visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Adjacent day column (focus secondary)\" is not visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Weekly grid\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC013",
+    "title": "Semana que não contém hoje: voltar uma semana e confirmar que continua sem foco se ainda não for a semana atual",
+    "description": "Verifica que ao voltar uma semana a partir de uma semana fora da atual, a semana muda e continua sem destaque se ainda não contiver hoje.",
+    "category": "Visualização semanal de agenda (Planner)",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /planner"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Next week\" button"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Previous week\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Week label\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Weekly grid\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC014",
+    "title": "Editar uma tarefa a partir de uma coluna do dia e salvar alterações",
+    "description": "Verifica que ao clicar em uma tarefa abre modal de edição e que, ao salvar, a tarefa aparece atualizada na coluna.",
+    "category": "Visualização semanal de agenda (Planner)",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /planner"
+      },
+      {
+        "type": "action",
+        "description": "Click on a \"Task\" inside a day column"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Edit task modal\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Fill \"Title\" field with \"Tarefa atualizada - Planner\""
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Salvar\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Tarefa atualizada - Planner\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC015",
+    "title": "Cancelar/fechar o modal de edição de tarefa sem salvar",
+    "description": "Verifica que é possível fechar o modal de edição e que nenhuma alteração é aplicada quando não se salva.",
+    "category": "Visualização semanal de agenda (Planner)",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /planner"
+      },
+      {
+        "type": "action",
+        "description": "Click on a \"Task\" inside a day column"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Edit task modal\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Cancel\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Edit task modal\" is not visible"
+      }
+    ]
+  },
+  {
+    "id": "TC016",
+    "title": "Planner: semana atual destaca o dia de hoje e faz scroll para a coluna primária",
+    "description": "Verifica que, ao abrir o Planner na semana que contém hoje, o dia atual recebe destaque primário (e vizinhos podem receber secundário) e a grade rola para deixar o foco visível.",
+    "category": "Foco visual e comportamento de scroll no Planner",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /planner"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Weekly planner grid\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Day column marked as focus primary\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Day column marked as focus secondary\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Focus primary day column\" is visible in the viewport (not clipped off-screen horizontally)"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Today label or current date indicator\" is visible within the focus primary day column"
+      }
+    ]
+  },
+  {
+    "id": "TC017",
+    "title": "Planner: navegar para uma semana que não contém hoje não exibe foco e não faz scroll automático",
+    "description": "Verifica que, ao sair da semana atual para outra semana, não existe destaque de foco primário/secundário e não ocorre centralização automática para 'hoje'.",
+    "category": "Foco visual e comportamento de scroll no Planner",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /planner"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Next week\" button in the planner navigation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Weekly planner grid\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Day column marked as focus primary\" is not visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Day column marked as focus secondary\" is not visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Today\" is not visible within the weekly grid"
+      }
+    ]
+  },
+  {
+    "id": "TC018",
+    "title": "Planner: voltar para a semana atual reavalia foco e recentraliza a coluna primária",
+    "description": "Verifica que, após navegar para outra semana e retornar, o Planner volta a destacar o dia atual como foco primário e o coloca em evidência na grade.",
+    "category": "Foco visual e comportamento de scroll no Planner",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /planner"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Next week\" button in the planner navigation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Day column marked as focus primary\" is not visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Previous week\" button in the planner navigation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Day column marked as focus primary\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Focus primary day column\" is visible in the viewport (not clipped off-screen horizontally)"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Today label or current date indicator\" is visible within the focus primary day column"
+      }
+    ]
+  },
+  {
+    "id": "TC019",
+    "title": "Planner: navegação entre semanas alterna corretamente o comportamento de scroll (com/sem hoje)",
+    "description": "Verifica que o comportamento de centralização automática ocorre somente quando a semana exibida contém hoje, mesmo após múltiplas navegações.",
+    "category": "Foco visual e comportamento de scroll no Planner",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /planner"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Day column marked as focus primary\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Next week\" button in the planner navigation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Day column marked as focus primary\" is not visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Next week\" button in the planner navigation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Day column marked as focus primary\" is not visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Previous week\" button in the planner navigation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Day column marked as focus primary\" is not visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Previous week\" button in the planner navigation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Day column marked as focus primary\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC020",
+    "title": "Planner: foco secundário (vizinhos do dia atual) aparece apenas quando a semana contém hoje",
+    "description": "Verifica que colunas vizinhas ao dia atual podem receber foco secundário quando hoje está na semana exibida, e que isso desaparece em semanas fora de hoje.",
+    "category": "Foco visual e comportamento de scroll no Planner",
+    "priority": "Low",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /planner"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Day column marked as focus primary\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Day column marked as focus secondary\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Next week\" button in the planner navigation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Day column marked as focus secondary\" is not visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Previous week\" button in the planner navigation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Day column marked as focus secondary\" is visible"
+      }
+    ]
+  }
+]

@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef, useLayoutEffect } from 'react';
 import {
   startOfWeek,
   endOfWeek,
@@ -15,10 +15,11 @@ import Sidebar from '../components/Sidebar';
 import DayColumn from '../components/DayColumn';
 import WeeklyProgress from '../components/WeeklyProgress';
 import TaskFormModal from '../components/TaskFormModal';
+import { computeDayFocusLevel } from '../utils/plannerFocus';
 import './PlannerPage.css';
 
 export default function PlannerPage() {
-  const { tasks, toggleTask, addTask, updateTask, deleteTask, getTasksByDate } =
+  const { toggleTask, addTask, updateTask, deleteTask, getTasksByDate } =
     useTasks();
   const [weekStart, setWeekStart] = useState(
     startOfWeek(new Date(), { weekStartsOn: 0 })
@@ -43,9 +44,31 @@ export default function PlannerPage() {
       all.push(...getTasksByDate(dateStr));
     });
     return all;
-  }, [weekDays, tasks, getTasksByDate]);
+  }, [weekDays, getTasksByDate]);
 
   const weekCompleted = weekTasks.filter((t) => t.completed).length;
+
+  const todayIndexInWeek = useMemo(
+    () => weekDays.findIndex((d) => checkIsToday(d)),
+    [weekDays]
+  );
+
+  const todayColumnRef = useRef(null);
+
+  useLayoutEffect(() => {
+    if (todayIndexInWeek < 0) return;
+    const node = todayColumnRef.current;
+    if (!node) return;
+    const run = () => {
+      node.scrollIntoView({
+        behavior: 'smooth',
+        inline: 'center',
+        block: 'nearest',
+      });
+    };
+    const id = requestAnimationFrame(run);
+    return () => cancelAnimationFrame(id);
+  }, [weekStart, todayIndexInWeek]);
 
   const goToPrevWeek = () => setWeekStart((prev) => subWeeks(prev, 1));
   const goToNextWeek = () => setWeekStart((prev) => addWeeks(prev, 1));
@@ -84,34 +107,59 @@ export default function PlannerPage() {
       <Sidebar onNewTask={handleNewTask} />
 
       <main className="planner__main">
-        <header className="planner__header">
-          <button className="planner__nav-btn" onClick={goToPrevWeek}>
-            <ChevronLeft size={20} />
-          </button>
-          <span className="planner__week-label">{weekLabel}</span>
-          <button className="planner__nav-btn" onClick={goToNextWeek}>
-            <ChevronRight size={20} />
-          </button>
-        </header>
+        <div className="planner__content">
+          <header className="planner__header-card">
+            <p className="planner__eyebrow">Agenda semanal</p>
+            <div className="planner__header-row">
+              <button
+                type="button"
+                className="planner__nav-btn"
+                aria-label="Semana anterior"
+                onClick={goToPrevWeek}
+              >
+                <ChevronLeft size={20} />
+              </button>
+              <h2 className="planner__week-label">{weekLabel}</h2>
+              <button
+                type="button"
+                className="planner__nav-btn"
+                aria-label="Próxima semana"
+                onClick={goToNextWeek}
+              >
+                <ChevronRight size={20} />
+              </button>
+            </div>
+          </header>
 
-        <div className="planner__grid">
-          {weekDays.map((day) => {
-            const dateStr = format(day, 'yyyy-MM-dd');
-            const dayTasks = getTasksByDate(dateStr);
-            return (
-              <DayColumn
-                key={dateStr}
-                date={day}
-                isToday={checkIsToday(day)}
-                tasks={dayTasks}
-                onToggleComplete={toggleTask}
-                onEditTask={handleEditTask}
-              />
-            );
-          })}
+          <section className="planner__grid-shell">
+            <div className="planner__grid">
+              {weekDays.map((day, dayIndex) => {
+                const dateStr = format(day, 'yyyy-MM-dd');
+                const dayTasks = getTasksByDate(dateStr);
+                const focusLevel = computeDayFocusLevel(
+                  dayIndex,
+                  todayIndexInWeek
+                );
+                const isFocusAnchor =
+                  focusLevel === 'primary' && todayIndexInWeek >= 0;
+                return (
+                  <DayColumn
+                    key={dateStr}
+                    ref={isFocusAnchor ? todayColumnRef : undefined}
+                    date={day}
+                    isToday={checkIsToday(day)}
+                    focusLevel={focusLevel}
+                    tasks={dayTasks}
+                    onToggleComplete={toggleTask}
+                    onEditTask={handleEditTask}
+                  />
+                );
+              })}
+            </div>
+          </section>
+
+          <WeeklyProgress completed={weekCompleted} total={weekTasks.length} />
         </div>
-
-        <WeeklyProgress completed={weekCompleted} total={weekTasks.length} />
       </main>
 
       <TaskFormModal

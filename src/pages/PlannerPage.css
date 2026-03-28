@@ -1,57 +1,166 @@
 .planner {
   display: flex;
   min-height: 100vh;
+  width: 100%;
 }
 
 .planner__main {
   flex: 1;
+  min-width: 0;
+  min-height: 0;
   display: flex;
   flex-direction: column;
-  padding: var(--space-md);
-  gap: var(--space-sm);
-  min-width: 0;
   overflow: hidden;
+  padding: var(--space-sm) var(--space-md);
+  background-color: #0c0f16;
+  background-image: radial-gradient(
+      circle at top right,
+      rgba(59, 130, 246, 0.06),
+      transparent 55%
+    ),
+    radial-gradient(circle at bottom left, rgba(139, 92, 246, 0.04), transparent 55%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 45%);
 }
 
-.planner__header {
+.planner__content {
+  width: 100%;
+  max-width: 1320px;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+/* Hierarquia: cabeçalho → progresso semanal → grade (DOM tem progresso por último) */
+.planner__header-card {
+  order: 1;
+  flex-shrink: 0;
+  align-self: center;
+  width: 100%;
+  max-width: min(100%, 560px);
+  padding: var(--space-xs) var(--space-sm);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.planner__content > .weekly-progress {
+  order: 2;
+  flex-shrink: 0;
+  padding: var(--space-xs) var(--space-sm);
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(59, 130, 246, 0.22);
+  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.06);
+}
+
+.planner__eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  line-height: 1.3;
+}
+
+.planner__header-row {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-md);
-  padding: var(--space-xs) 0;
+  gap: var(--space-sm);
 }
 
 .planner__nav-btn {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-card);
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   color: var(--text-secondary);
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 200ms ease;
+  cursor: pointer;
+  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease,
+    transform 180ms ease;
 }
 
 .planner__nav-btn:hover {
   color: var(--text-primary);
-  background: var(--bg-card);
-  border-color: var(--text-secondary);
+  background: rgba(37, 99, 235, 0.16);
+  border-color: rgba(59, 130, 246, 0.45);
+  transform: translateY(-1px);
+}
+
+.planner__nav-btn:active {
+  transform: translateY(0);
+  background: rgba(37, 99, 235, 0.22);
+}
+
+.planner__nav-btn:focus-visible {
+  outline: 2px solid rgba(96, 165, 250, 0.95);
+  outline-offset: 3px;
 }
 
 .planner__week-label {
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-primary);
-  min-width: 200px;
+  min-width: 0;
+  max-width: min(100%, 280px);
   text-align: center;
+  letter-spacing: -0.2px;
+  line-height: 1.25;
+}
+
+.planner__grid-shell {
+  order: 3;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
 }
 
 .planner__grid {
   display: flex;
-  gap: var(--space-xs);
+  gap: 4px;
   flex: 1;
+  min-height: 0;
+  min-width: 0;
   overflow-x: auto;
-  padding-bottom: var(--space-xs);
+  overflow-y: hidden;
+  padding-bottom: 4px;
+  scrollbar-gutter: stable;
+}
+
+/* Notebook: mantém progresso e navegação legíveis sem estourar a largura */
+@media (max-width: 1440px) {
+  .planner__main {
+    padding: var(--space-sm);
+  }
+
+  .planner__content {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+  .planner__header-row {
+    gap: var(--space-xs);
+  }
+
+  .planner__week-label {
+    font-size: 16px;
+    max-width: 200px;
+  }
 }

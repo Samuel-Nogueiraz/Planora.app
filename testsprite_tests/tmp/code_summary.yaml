@@ -1,0 +1,53 @@
+version: "2"
+type: frontend
+tech_stack:
+  - JavaScript
+  - React
+  - react-router-dom
+  - Vite
+  - date-fns
+routes:
+  - path: /
+    file: src/pages/HomePage.jsx
+    auth_required: false
+    description: Dashboard diario com progresso e lista de tarefas do dia.
+  - path: /planner
+    file: src/pages/PlannerPage.jsx
+    auth_required: false
+    description: Agenda semanal com navegacao entre semanas e foco no dia atual.
+features:
+  - name: Gerenciamento de tarefas
+    description: Criar, editar, concluir e excluir tarefas usando estado local em contexto React.
+    files:
+      - src/hooks/useTasks.jsx
+      - src/components/TaskFormModal.jsx
+      - src/components/TaskCard.jsx
+      - src/pages/HomePage.jsx
+      - src/pages/PlannerPage.jsx
+    entry_route: /
+    user_interactions:
+      - Clicar em Nova tarefa para abrir o modal de criacao.
+      - Preencher titulo, data e demais campos da tarefa e salvar.
+      - Marcar ou desmarcar uma tarefa como concluida.
+      - Abrir uma tarefa existente para editar ou excluir.
+    api_calls: []
+    auth_required: false
+  - name: Visualizacao semanal de agenda
+    description: Exibe tarefas por dia da semana com navegacao para semana anterior e proxima.
+    files:
+      - src/pages/PlannerPage.jsx
+      - src/components/DayColumn.jsx
+      - src/components/WeeklyProgress.jsx
+      - src/utils/plannerFocus.js
+    entry_route: /planner
+    user_interactions:
+      - Navegar entre semanas pelos botoes de anterior e proxima.
+      - Visualizar tarefas por coluna de dia.
+      - Abrir/editar tarefas a partir de um dia especifico.
+      - Ver o progresso semanal de tarefas concluidas.
+    api_calls: []
+    auth_required: false
+known_limitations:
+  - issue: Tarefas sao mantidas apenas em memoria no estado React.
+    location: src/hooks/useTasks.jsx
+    impact: Dados nao persistem entre recarregamentos da pagina.

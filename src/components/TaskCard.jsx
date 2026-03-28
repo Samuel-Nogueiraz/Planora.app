@@ -8,8 +8,16 @@ const CATEGORY_COLORS = {
   pessoal: 'var(--cat-pessoal)',
 };
 
+const CATEGORY_LABELS = {
+  estudo: 'Estudo',
+  academia: 'Academia',
+  trabalho: 'Trabalho',
+  pessoal: 'Pessoal',
+};
+
 export default function TaskCard({ task, onToggleComplete, onEdit }) {
   const categoryColor = CATEGORY_COLORS[task.category] ?? 'var(--cat-estudo)';
+  const categoryLabel = CATEGORY_LABELS[task.category] ?? 'Estudo';
   const isCompleted = !!task.completed;
   const statusColorVar = isCompleted
     ? 'var(--status-completed)'
@@ -28,11 +36,18 @@ export default function TaskCard({ task, onToggleComplete, onEdit }) {
       }}
       onClick={() => onEdit?.(task)}
     >
-      <div className="task-card__category-bar" />
+      <div
+        className="task-card__category-rail"
+        role="img"
+        aria-label={`Categoria: ${categoryLabel}`}
+      >
+        <div className="task-card__category-bar" />
+      </div>
 
       <div className="task-card__body">
         <div className="task-card__header">
           <div className="task-card__titles">
+            <span className="task-card__eyebrow">{categoryLabel}</span>
             <h3 className="task-card__title">{task.title}</h3>
             {task.subtitle && (
               <p className="task-card__subtitle">{task.subtitle}</p>
@@ -43,6 +58,9 @@ export default function TaskCard({ task, onToggleComplete, onEdit }) {
             className={`task-card__toggle ${
               isCompleted ? 'task-card__toggle--done' : ''
             }`}
+            aria-label={
+              isCompleted ? 'Marcar tarefa como pendente' : 'Marcar tarefa como concluída'
+            }
             onClick={(e) => {
               e.stopPropagation();
               onToggleComplete?.(task.id);
@@ -59,9 +77,9 @@ export default function TaskCard({ task, onToggleComplete, onEdit }) {
               {task.startTime} — {task.endTime}
             </span>
           </div>
-          <span className="task-card__status">
-            {isCompleted ? 'Concluído' : 'Pendente'}
-          </span>
+          {isCompleted && (
+            <span className="task-card__status">Concluído</span>
+          )}
         </div>
       </div>
     </div>

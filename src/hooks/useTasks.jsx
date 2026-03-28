@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useCallback } from 'react';
 import { initialTasks } from '../data/mockTasks';
 
 const TaskContext = createContext(null);
@@ -33,9 +33,10 @@ export function TaskProvider({ children }) {
     );
   };
 
-  const getTasksByDate = (dateStr) => {
-    return tasks.filter((task) => task.date === dateStr);
-  };
+  const getTasksByDate = useCallback(
+    (dateStr) => tasks.filter((task) => task.date === dateStr),
+    [tasks]
+  );
 
   const value = {
     tasks,

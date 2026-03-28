@@ -36,11 +36,11 @@
   font-weight: 800;
 }
 
-.progress-header__line-saudation {
+.progress-header__greeting-line2 {
   font-size: 14px;
   font-weight: 500;
   color: var(--text-secondary);
-  transform:translateY( 7px);
+  transform: translateY(7px);
 }
 
 .progress-header__subtitle {
@@ -48,14 +48,14 @@
   font-weight: 500;
   color: var(--text-secondary);
   text-transform: capitalize;
-  transform:translateY( 11px);
+  transform: translateY(11px);
 }
 
 .progress-header__progress-text {
   font-size: 13px;
   font-weight: 600;
   color: var(--text-secondary);
-  transform:translateY( 9px);
+  transform: translateY(9px);
 }
 
 .progress-header__bar {

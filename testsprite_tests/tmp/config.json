@@ -1,0 +1,18 @@
+{
+  "status": "commited",
+  "type": "frontend",
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:5173",
+  "executionArgs": {
+    "projectName": "Planora.App",
+    "projectPath": "C:/Users/samue/OneDrive/Documentos/SITES PROPRIOS/Planora.App",
+    "testIds": [],
+    "additionalInstruction": "",
+    "serverMode": "development",
+    "envs": {
+      "API_KEY": "sk-user-o1Iox3Otg19yQYq2w3UeYiFTLns3pWe-qqlHgN4xtkqYz7vEV_Ssp9OaBrqzsux0DWuDdDxTJMTJ7Zq3GSr8X0rqnnONITrGpOFVWrF9aDAqFAkLzvEP8xjiJUCAESEPTWI"
+    }
+  },
+  "serverPort": 53275,
+  "proxy": "http://006cf989-de88-4b2f-beed-6bc31c9c7cba:4XUnprZhszUy4hCw5yYXxjHxwzxai5W5@tun.testsprite.com:8080"
+}

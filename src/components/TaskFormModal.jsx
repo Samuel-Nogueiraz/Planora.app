@@ -44,6 +44,7 @@ export default function TaskFormModal({
 }) {
   const isEditing = !!task;
   const [formData, setFormData] = useState(EMPTY_FORM);
+  const submitLabel = isEditing ? 'Salvar alterações' : 'Criar tarefa';
 
   useEffect(() => {
     if (task) {
@@ -88,32 +89,34 @@ export default function TaskFormModal({
       title={isEditing ? 'Editar tarefa' : 'Criar nova tarefa'}
     >
       <form className="task-form" onSubmit={handleSubmit}>
-        <div className="task-form__field">
-          <label className="task-form__label">Dia</label>
-          <input
-            type="date"
-            className="task-form__input"
-            value={formData.date}
-            onChange={(e) => handleChange('date', e.target.value)}
-          />
+        <div className="task-form__grid task-form__grid--meta">
+          <div className="task-form__field">
+            <label className="task-form__label">Dia</label>
+            <input
+              type="date"
+              className="task-form__input"
+              value={formData.date}
+              onChange={(e) => handleChange('date', e.target.value)}
+            />
+          </div>
+
+          <div className="task-form__field">
+            <label className="task-form__label">Frequência</label>
+            <select
+              className="task-form__select"
+              value={formData.frequency}
+              onChange={(e) => handleChange('frequency', e.target.value)}
+            >
+              {FREQUENCIES.map((f) => (
+                <option key={f.value} value={f.value}>
+                  {f.label}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
 
-        <div className="task-form__field">
-          <label className="task-form__label">Frequência da tarefa</label>
-          <select
-            className="task-form__select"
-            value={formData.frequency}
-            onChange={(e) => handleChange('frequency', e.target.value)}
-          >
-            {FREQUENCIES.map((f) => (
-              <option key={f.value} value={f.value}>
-                {f.label}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="task-form__field">
+        <div className="task-form__field task-form__field--title">
           <label className="task-form__label">
             Título da tarefa <span className="task-form__required">*</span>
           </label>
@@ -128,21 +131,6 @@ export default function TaskFormModal({
         </div>
 
         <div className="task-form__field">
-          <label className="task-form__label">Categoria</label>
-          <select
-            className="task-form__select"
-            value={formData.category}
-            onChange={(e) => handleChange('category', e.target.value)}
-          >
-            {CATEGORIES.map((c) => (
-              <option key={c.value} value={c.value}>
-                {c.label}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="task-form__field">
           <label className="task-form__label">Subtítulo</label>
           <input
             type="text"
@@ -154,7 +142,7 @@ export default function TaskFormModal({
         </div>
 
         <div className="task-form__field">
-          <label className="task-form__label">Descrição (opcional)</label>
+          <label className="task-form__label">Descrição</label>
           <textarea
             className="task-form__textarea"
             value={formData.description}
@@ -164,10 +152,32 @@ export default function TaskFormModal({
           />
         </div>
 
+        <fieldset className="task-form__field task-form__fieldset">
+          <legend className="task-form__label">Categorias</legend>
+          <div className="task-form__chip-group" role="radiogroup" aria-label="Categorias">
+            {CATEGORIES.map((category) => (
+              <label
+                key={category.value}
+                className={`task-form__chip ${
+                  formData.category === category.value ? 'task-form__chip--selected' : ''
+                } task-form__chip--${category.value}`}
+              >
+                <input
+                  type="radio"
+                  name="category"
+                  value={category.value}
+                  checked={formData.category === category.value}
+                  onChange={(e) => handleChange('category', e.target.value)}
+                  className="task-form__chip-input"
+                />
+                <span className="task-form__chip-label">{category.label}</span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+
         <div className="task-form__field">
-          <label className="task-form__label">
-            Horário <span className="task-form__required">*</span>
-          </label>
+          <label className="task-form__label">Horário</label>
           <div className="task-form__time-group">
             <div className="task-form__time-field">
               <span className="task-form__time-label">Início</span>
@@ -194,19 +204,23 @@ export default function TaskFormModal({
 
         <fieldset className="task-form__field task-form__fieldset">
           <legend className="task-form__label">Prioridade</legend>
-          <div className="task-form__priority-group">
-            {PRIORITIES.map((p) => (
-              <label key={p.value} className="task-form__radio-label">
+          <div className="task-form__chip-group" role="radiogroup" aria-label="Prioridade">
+            {PRIORITIES.map((priority) => (
+              <label
+                key={priority.value}
+                className={`task-form__chip ${
+                  formData.priority === priority.value ? 'task-form__chip--selected' : ''
+                } task-form__chip--priority-${priority.value}`}
+              >
                 <input
                   type="radio"
                   name="priority"
-                  value={p.value}
-                  checked={formData.priority === p.value}
+                  value={priority.value}
+                  checked={formData.priority === priority.value}
                   onChange={(e) => handleChange('priority', e.target.value)}
-                  className="task-form__radio-input"
+                  className="task-form__chip-input"
                 />
-                <span className="task-form__radio-circle" />
-                <span>{p.label}</span>
+                <span className="task-form__chip-label">{priority.label}</span>
               </label>
             ))}
           </div>
@@ -226,17 +240,17 @@ export default function TaskFormModal({
           </div>
           <div className="task-form__actions-right">
             <button
+              type="submit"
+              className="task-form__btn task-form__btn--primary"
+            >
+              {submitLabel}
+            </button>
+            <button
               type="button"
               className="task-form__btn task-form__btn--ghost"
               onClick={onClose}
             >
               Descartar
-            </button>
-            <button
-              type="submit"
-              className="task-form__btn task-form__btn--primary"
-            >
-              {isEditing ? 'Salvar alterações' : 'Criar tarefa'}
             </button>
           </div>
         </div>

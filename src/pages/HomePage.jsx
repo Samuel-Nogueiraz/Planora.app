@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import { useNavigate } from 'react-router-dom';
 import { useTasks } from '../hooks/useTasks';
 import Sidebar from '../components/Sidebar';
 import TaskCard from '../components/TaskCard';
@@ -11,6 +12,7 @@ import './HomePage.css';
 export default function HomePage() {
   const { getTasksByDate, toggleTask, addTask, updateTask, deleteTask } =
     useTasks();
+  const navigate = useNavigate();
   const [editingTask, setEditingTask] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -27,6 +29,8 @@ export default function HomePage() {
     setEditingTask(task);
     setIsModalOpen(true);
   };
+
+  const handleOpenPlanner = () => navigate('/planner');
 
   const handleNewTask = () => {
     setEditingTask(null);
@@ -86,6 +90,16 @@ export default function HomePage() {
                   />
                 ))
               )}
+            </div>
+
+            <div className="home__planner-cta">
+              <button
+                type="button"
+                className="home__planner-btn"
+                onClick={handleOpenPlanner}
+              >
+                Abrir agenda completa
+              </button>
             </div>
           </section>
         </div>

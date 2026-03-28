@@ -1,18 +1,41 @@
 .day-column {
+  position: relative;
   flex: 1;
-  min-width: 160px;
+  min-width: 140px;
+  scroll-margin-inline: var(--space-xs);
   display: flex;
   flex-direction: column;
   background: var(--bg-secondary);
   border-radius: var(--radius);
   border: 1px solid var(--border-card);
   overflow: hidden;
-  transition: border-color 200ms ease, box-shadow 200ms ease;
+  transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
 }
 
-.day-column--today {
-  border-color: var(--today-border);
-  box-shadow: 0 0 24px var(--today-glow), inset 0 0 24px var(--today-glow);
+/* Primário: borda 1px + sombras (evita +1px de largura vs. colunas sem foco) */
+.day-column--focus-primary {
+  z-index: 2;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(96, 165, 250, 0.95);
+  box-shadow:
+    0 0 0 2px rgba(59, 130, 246, 0.45),
+    0 0 0 1px rgba(59, 130, 246, 0.35),
+    0 4px 6px rgba(0, 0, 0, 0.2),
+    0 12px 28px rgba(0, 0, 0, 0.35),
+    0 0 36px rgba(59, 130, 246, 0.28);
+  transform: translateY(-2px);
+}
+
+/* Secundário: vizinhos do dia atual (ou segunda quando domingo é hoje) */
+.day-column--focus-secondary {
+  z-index: 1;
+  border-color: rgba(59, 130, 246, 0.42);
+  box-shadow:
+    0 0 0 1px rgba(59, 130, 246, 0.12),
+    0 2px 4px rgba(0, 0, 0, 0.18),
+    0 6px 16px rgba(0, 0, 0, 0.22);
+  transform: translateY(-1px);
 }
 
 .day-column__header {
@@ -66,7 +89,7 @@
   padding: var(--space-xs);
   display: flex;
   flex-direction: column;
-  gap: var(--space-xs);
+  gap: var(--space-sm, 8px);
   overflow-y: auto;
   min-height: 120px;
 }
