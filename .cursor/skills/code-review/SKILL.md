@@ -1,4 +1,9 @@
-# Skill — Code Review (Planora)
+---
+name: code-review
+description: Revisa código para clareza, manutenção e boas práticas no Planora. Usar quando o usuário pedir revisão de código, refatoração, code review, melhorias técnicas ou boas práticas sem mudar produto, UI ou fluxo de UX.
+---
+
+# Code Review (Planora)
 
 ## Identidade
 

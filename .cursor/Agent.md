@@ -18,11 +18,12 @@ Ele deve agir **apenas de acordo com o papel explicitamente solicitado no prompt
 
 Exemplos de ativação:
 
-* “Use o UI skill” → foco em interface visual `.cursor/skills/design-UI.md`
-* “Use o UX skill” → foco em experiência do usuário `.cursor/skills/UX.md`
-* “Use o Code Review skill” → revisar código `.cursor/skills/code-review.md`
-* “Use o Testing skill” → validar comportamento `.cursor/skills/testing.md`
-* “Use o Product skill” → decisões de produto `.cursor/skills/product.md`
+* “Use o UI skill” → foco em interface visual `.cursor/skills/design-ui/SKILL.md`
+* “Use o UX skill” → foco em experiência do usuário `.cursor/skills/ux/SKILL.md`
+* “Use o Code Review skill” → revisar código `.cursor/skills/code-review/SKILL.md`
+* “Use o Testing skill” → validar comportamento `.cursor/skills/testing/SKILL.md`
+* “Use o Product skill” → decisões de produto `.cursor/skills/product/SKILL.md`
+* “Use o Frontend UI/UX skill” (ou pedido para implementar UI/UX em código) → entrega integrada no React `.cursor/skills/frontend-ui-ux/SKILL.md`
 
 ---
 
@@ -85,7 +86,7 @@ ASP.NET Core
 
 Banco de dados (futuro)
 
-SQLite
+Firebase
 
 ---
 
@@ -217,7 +218,11 @@ Regras:
 
 Seguir orientações de UI em:
 
-`.cursor/skills/design-UI.md`
+`.cursor/skills/design-ui/SKILL.md`
+
+Para **implementar** pedidos de UI e UX em código (estrutura limpa, estados, microcopy):
+
+`.cursor/skills/frontend-ui-ux/SKILL.md`
 
 (Não existe `docs/design-system.md` no repositório; princípios globais continuam listados abaixo.)
 

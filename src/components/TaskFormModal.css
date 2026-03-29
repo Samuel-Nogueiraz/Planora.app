@@ -223,6 +223,13 @@
   --chip-accent: #c084fc;
 }
 
+/* Desktop / tablet: categorias e horário em coluna (comportamento original) */
+.task-form__category-time-row {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
 .task-form__actions {
   display: flex;
   align-items: center;
@@ -304,30 +311,103 @@
 
 @media (max-width: 640px) {
   .task-form {
-    gap: 16px;
+    gap: 14px;
   }
 
-  .task-form__grid--meta,
-  .task-form__time-group {
-    grid-template-columns: 1fr;
+  /* Dia à esquerda, frequência à direita */
+  .task-form__grid--meta {
+    grid-template-columns: minmax(0, 38%) minmax(0, 1fr);
+    gap: 10px;
   }
 
+  .task-form__grid--meta .task-form__input[type='date'],
+  .task-form__grid--meta .task-form__select {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
+
+  .task-form__grid--meta .task-form__select {
+    padding-right: 36px;
+    background-position: right 10px center;
+  }
+
+  .task-form__grid--meta .task-form__label {
+    font-size: 0.82rem;
+  }
+
+  /* Categorias à esquerda, horário compacto à direita */
+  .task-form__category-time-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+    gap: 12px;
+    align-items: start;
+  }
+
+  .task-form__category-time-row .task-form__chip-group {
+    gap: 6px;
+  }
+
+  .task-form__category-time-row .task-form__chip {
+    min-height: 34px;
+    padding: 0 10px;
+    font-size: 0.78rem;
+  }
+
+  .task-form__category-time-row .task-form__time-group {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .task-form__category-time-row .task-form__time-label {
+    font-size: 0.72rem;
+  }
+
+  .task-form__category-time-row .task-form__input[type='time'] {
+    padding: 8px 8px;
+    font-size: 0.82rem;
+  }
+
+  .task-form__category-time-row .task-form__label {
+    font-size: 0.82rem;
+  }
+
+  /* Criar+Descartar ou Excluir+Salvar na mesma linha */
   .task-form__actions {
-    flex-direction: column;
+    flex-direction: row;
     align-items: stretch;
+    gap: 10px;
+    padding-top: 16px;
   }
 
-  .task-form__actions-left,
+  .task-form__actions-left:empty {
+    display: none;
+  }
+
+  .task-form__actions-left:not(:empty) {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
   .task-form__actions-right {
-    width: 100%;
+    flex: 1 1 0;
+    min-width: 0;
     margin-left: 0;
+    flex-direction: row;
+    justify-content: stretch;
+    gap: 8px;
   }
 
-  .task-form__actions-right {
-    flex-direction: column;
+  .task-form__actions-left .task-form__btn,
+  .task-form__actions-right .task-form__btn {
+    flex: 1 1 0;
+    min-width: 0;
+    width: auto;
+    min-height: 44px;
+    padding: 0 12px;
+    font-size: 0.88rem;
   }
 
-  .task-form__btn {
-    width: 100%;
+  .task-form__btn--primary {
+    min-width: 0;
   }
 }

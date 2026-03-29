@@ -1,4 +1,9 @@
-# Skill — UI Design (Planora)
+---
+name: design-ui
+description: Orienta UI visual—layout, cores HEX, tipografia e espaçamento—no Planora. Usar quando o usuário pedir design, interface, layout, cores, tipografia, aparência visual ou componentes visuais sem alterar lógica de negócio ou backend.
+---
+
+# UI Design (Planora)
 
 ## Identidade
 

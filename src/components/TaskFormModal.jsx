@@ -152,52 +152,54 @@ export default function TaskFormModal({
           />
         </div>
 
-        <fieldset className="task-form__field task-form__fieldset">
-          <legend className="task-form__label">Categorias</legend>
-          <div className="task-form__chip-group" role="radiogroup" aria-label="Categorias">
-            {CATEGORIES.map((category) => (
-              <label
-                key={category.value}
-                className={`task-form__chip ${
-                  formData.category === category.value ? 'task-form__chip--selected' : ''
-                } task-form__chip--${category.value}`}
-              >
-                <input
-                  type="radio"
-                  name="category"
-                  value={category.value}
-                  checked={formData.category === category.value}
-                  onChange={(e) => handleChange('category', e.target.value)}
-                  className="task-form__chip-input"
-                />
-                <span className="task-form__chip-label">{category.label}</span>
-              </label>
-            ))}
-          </div>
-        </fieldset>
-
-        <div className="task-form__field">
-          <label className="task-form__label">Horário</label>
-          <div className="task-form__time-group">
-            <div className="task-form__time-field">
-              <span className="task-form__time-label">Início</span>
-              <input
-                type="time"
-                className="task-form__input"
-                value={formData.startTime}
-                onChange={(e) => handleChange('startTime', e.target.value)}
-                required
-              />
+        <div className="task-form__category-time-row">
+          <fieldset className="task-form__field task-form__fieldset">
+            <legend className="task-form__label">Categorias</legend>
+            <div className="task-form__chip-group" role="radiogroup" aria-label="Categorias">
+              {CATEGORIES.map((category) => (
+                <label
+                  key={category.value}
+                  className={`task-form__chip ${
+                    formData.category === category.value ? 'task-form__chip--selected' : ''
+                  } task-form__chip--${category.value}`}
+                >
+                  <input
+                    type="radio"
+                    name="category"
+                    value={category.value}
+                    checked={formData.category === category.value}
+                    onChange={(e) => handleChange('category', e.target.value)}
+                    className="task-form__chip-input"
+                  />
+                  <span className="task-form__chip-label">{category.label}</span>
+                </label>
+              ))}
             </div>
-            <div className="task-form__time-field">
-              <span className="task-form__time-label">Fim</span>
-              <input
-                type="time"
-                className="task-form__input"
-                value={formData.endTime}
-                onChange={(e) => handleChange('endTime', e.target.value)}
-                required
-              />
+          </fieldset>
+
+          <div className="task-form__field">
+            <label className="task-form__label">Horário</label>
+            <div className="task-form__time-group">
+              <div className="task-form__time-field">
+                <span className="task-form__time-label">Início</span>
+                <input
+                  type="time"
+                  className="task-form__input"
+                  value={formData.startTime}
+                  onChange={(e) => handleChange('startTime', e.target.value)}
+                  required
+                />
+              </div>
+              <div className="task-form__time-field">
+                <span className="task-form__time-label">Fim</span>
+                <input
+                  type="time"
+                  className="task-form__input"
+                  value={formData.endTime}
+                  onChange={(e) => handleChange('endTime', e.target.value)}
+                  required
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -245,13 +247,15 @@ export default function TaskFormModal({
             >
               {submitLabel}
             </button>
-            <button
-              type="button"
-              className="task-form__btn task-form__btn--ghost"
-              onClick={onClose}
-            >
-              Descartar
-            </button>
+            {!isEditing && (
+              <button
+                type="button"
+                className="task-form__btn task-form__btn--ghost"
+                onClick={onClose}
+              >
+                Descartar
+              </button>
+            )}
           </div>
         </div>
       </form>

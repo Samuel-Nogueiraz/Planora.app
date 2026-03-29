@@ -95,4 +95,4 @@ Novos modais que contenham formulários devem **reutilizar** essas classes ou ex
 ## Referência cruzada
 
 - Mapa de componentes: `.cursor/components/components-map.md` (seção Modais).
-- Princípios globais de UI: `.cursor/skills/design-UI.md`.
+- Princípios globais de UI: `.cursor/skills/design-ui/SKILL.md`.

@@ -109,3 +109,18 @@
   color: var(--text-secondary);
   text-align: center;
 }
+
+@media (max-width: 768px) {
+  .day-column {
+    flex: 0 0 auto;
+    min-width: 65vw;
+    scroll-snap-align: center;
+  }
+}
+
+/* Telemóveis estreitos: colunas mais finas, vê-se mais o dia seguinte */
+@media (max-width: 480px) {
+  .day-column {
+    min-width: 56vw;
+  }
+}

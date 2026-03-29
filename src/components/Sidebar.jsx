@@ -12,8 +12,10 @@ const NAV_ITEMS = [
 export default function Sidebar({ onNewTask }) {
   const navigate = useNavigate();
   const location = useLocation();
+  const isPlannerActive = location.pathname.startsWith('/planner');
 
   return (
+    <>
     <aside className="sidebar">
       <div className="sidebar__brand">
         <button
@@ -35,13 +37,19 @@ export default function Sidebar({ onNewTask }) {
         {NAV_ITEMS.map((item) => (
           <button
             key={item.id}
+            type="button"
+            disabled={!item.path}
             className={`sidebar__link ${
-              location.pathname === item.path ? 'sidebar__link--active' : ''
+              item.path && location.pathname === item.path
+                ? 'sidebar__link--active'
+                : ''
             }`}
             onClick={() => item.path && navigate(item.path)}
           >
             <item.icon size={18} />
-            <span>{item.label}</span>
+            <span>
+              {item.path ? item.label : `${item.label} (em breve)`}
+            </span>
           </button>
         ))}
       </nav>
@@ -62,5 +70,37 @@ export default function Sidebar({ onNewTask }) {
         </div>
       </footer>
     </aside>
+
+    <nav className="bottom-nav" aria-label="Navegação principal">
+      <button
+        type="button"
+        className={`bottom-nav__item ${
+          location.pathname === '/' ? 'bottom-nav__item--active' : ''
+        }`}
+        aria-current={location.pathname === '/' ? 'page' : undefined}
+        onClick={() => navigate('/')}
+      >
+        <LayoutGrid size={22} aria-hidden />
+        <span>Hoje</span>
+      </button>
+      <button
+        type="button"
+        className="bottom-nav__fab"
+        aria-label="Nova tarefa"
+        onClick={onNewTask}
+      >
+        <Plus size={26} strokeWidth={2.25} aria-hidden />
+      </button>
+      <button
+        type="button"
+        className={`bottom-nav__item ${isPlannerActive ? 'bottom-nav__item--active' : ''}`}
+        aria-current={isPlannerActive ? 'page' : undefined}
+        onClick={() => navigate('/planner')}
+      >
+        <CalendarDays size={22} aria-hidden />
+        <span>Agenda</span>
+      </button>
+    </nav>
+    </>
   );
 }
