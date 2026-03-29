@@ -1,4 +1,9 @@
-# Skill — Product Thinking (Planora)
+---
+name: product
+description: Orienta priorização e product thinking com foco em valor e simplicidade no Planora. Usar quando o usuário pedir o que construir, priorização, roadmap, ideias de feature ou melhorias de produto sem escrever código ou UI detalhada.
+---
+
+# Product Thinking (Planora)
 
 ## Identidade
 

@@ -139,6 +139,7 @@
 @media (max-width: 640px) {
   .modal-overlay {
     padding: 12px;
+    padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
     align-items: flex-end;
   }
 

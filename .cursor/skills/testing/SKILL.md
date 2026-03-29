@@ -1,4 +1,9 @@
-# Skill — Testing & Qualidade (Planora)
+---
+name: testing
+description: Define cenários de teste, edge cases e validação mental de fluxos no Planora. Usar quando o usuário pedir testar, validar comportamento, qualidade, erros possíveis ou consistência sem implementar código ou redesenhar UI.
+---
+
+# Testing & Qualidade (Planora)
 
 ## Identidade
 

@@ -1,0 +1,32 @@
+---
+description: Contexto Planora — Agent, produto e arquitetura como fonte obrigatória; modo de operação do agente
+alwaysApply: true
+---
+
+# Planora — documentação principal
+
+Antes de implementar ou alterar código, **alinhar com** (ler quando relevante ao pedido):
+
+| Fonte | Conteúdo |
+|--------|-----------|
+| `.cursor/Agent.md` | Identidade, modo de operação, estrutura `src/`, páginas, componentes, hooks, serviços, estado, UI/estilo, escrita de código e comentários. |
+| `.cursor/Planora.md` | Produto, MVP, funcionalidades-alvo, stack e deploy em alto nível. |
+| `.cursor/Architecture/architecture-planora.md` | Visão fullstack e camadas do backend (Clean Architecture). |
+| `.cursor/Architecture/frontend-architecture.md` | Pastas e responsabilidades do frontend React. |
+| `.cursor/Architecture/state-management.md` | Regras de estado (sem duplicar estado; previsibilidade). |
+
+Não contradizer estes documentos sem atualizar a documentação.
+
+## Modo de operação (resumo de Agent.md)
+
+- **Um papel por vez:** UI, UX, code review, testing ou product só quando o utilizador pedir explicitamente; não empilhar análises não pedidas.
+- **Foco no pedido:** não expandir escopo nem “melhorar tudo” de uma vez.
+- **Código:** simplicidade, legibilidade, separação de responsabilidades; evitar lógica pesada na UI; componentes pequenos e reutilizáveis.
+
+## Skills
+
+Papéis opcionais em `.cursor/skills/<nome>/SKILL.md` — usar só quando invocados; caminhos listados em `Agent.md`.
+
+## Dúvida
+
+Preferir o que está em `.cursor/` e **consistência do repo** a atalhos que diverjam da arquitetura descrita.

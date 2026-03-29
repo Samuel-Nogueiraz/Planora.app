@@ -76,8 +76,9 @@ export default function HomePage() {
                 <div className="home__empty">
                   <p>Nenhuma tarefa para hoje ainda</p>
                   <p className="home__empty-hint">
-                    Clique em <span className="home__accent">Nova tarefa</span> na
-                    sidebar para começar agora.
+                    Toque em{' '}
+                    <span className="home__accent">+ Nova tarefa</span> para começar
+                    agora.
                   </p>
                 </div>
               ) : (

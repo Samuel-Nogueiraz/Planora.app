@@ -170,3 +170,105 @@
 .sidebar__edit-profile:hover {
   opacity: 1;
 }
+
+/* Mobile bottom bar: hidden no desktop */
+.bottom-nav {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 900;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 64px;
+    padding: 0 var(--space-sm);
+    padding-bottom: env(safe-area-inset-bottom, 0);
+    background: var(--bg-secondary);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.25);
+  }
+
+  .bottom-nav__item {
+    flex: 1;
+    max-width: 96px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 8px 6px;
+    margin: 0;
+    border: none;
+    border-radius: var(--radius-sm);
+    background: none;
+    color: var(--text-secondary);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    cursor: pointer;
+    transition: color 180ms ease, background 180ms ease;
+  }
+
+  .bottom-nav__item:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .bottom-nav__item--active {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .bottom-nav__item:focus-visible {
+    outline: 2px solid rgba(59, 130, 246, 0.65);
+    outline-offset: 2px;
+  }
+
+  .bottom-nav__fab {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    margin: -20px var(--space-xs) 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    background: var(--action-primary);
+    color: #fff;
+    cursor: pointer;
+    box-shadow:
+      0 4px 14px rgba(37, 99, 235, 0.45),
+      0 0 0 1px rgba(255, 255, 255, 0.12) inset;
+    transition: background 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+  }
+
+  .bottom-nav__fab:hover {
+    background: var(--action-primary-hover);
+    transform: translateY(-2px);
+    box-shadow:
+      0 8px 22px rgba(37, 99, 235, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.14) inset;
+  }
+
+  .bottom-nav__fab:active {
+    transform: translateY(0);
+  }
+
+  .bottom-nav__fab:focus-visible {
+    outline: 2px solid rgba(96, 165, 250, 0.95);
+    outline-offset: 3px;
+  }
+}

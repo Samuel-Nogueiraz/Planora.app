@@ -1,4 +1,9 @@
-# Skill — UX & Acessibilidade (Planora)
+---
+name: ux
+description: Orienta UX, fluxos, usabilidade e acessibilidade básica no Planora. Usar quando o usuário pedir experiência do usuário, fluxo, navegação, usabilidade, interação ou acessibilidade sem foco estético detalhado de UI.
+---
+
+# UX & Acessibilidade (Planora)
 
 ## Identidade
 

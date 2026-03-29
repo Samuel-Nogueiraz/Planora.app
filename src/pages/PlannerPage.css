@@ -164,3 +164,43 @@
     max-width: 200px;
   }
 }
+
+@media (max-width: 768px) {
+  .planner {
+    flex-direction: column;
+  }
+
+  .planner__main {
+    padding: var(--space-sm);
+    padding-bottom: 80px;
+  }
+
+  .planner__grid {
+    scroll-snap-type: x mandatory;
+  }
+
+  .planner__grid-shell {
+    position: relative;
+  }
+
+  .planner__grid-shell::before,
+  .planner__grid-shell::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 28px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .planner__grid-shell::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg-primary), transparent);
+  }
+
+  .planner__grid-shell::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg-primary), transparent);
+  }
+}

@@ -73,3 +73,13 @@
   transition: width 500ms ease;
 }
 
+@media (max-width: 768px) {
+  .progress-header {
+    padding: var(--space-sm);
+  }
+
+  .progress-header__greeting-line1 {
+    font-size: 22px;
+  }
+}
+
